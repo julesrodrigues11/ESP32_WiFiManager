@@ -1,4 +1,5 @@
 #include <WiFiManager.h>   // Include the WiFiManager library
+#include "WiFiCredentials.h"
 
 #define WIFI_TIMEOUT_SECONDS 180
 #define LED_PIN 2  // Onboard LED pin (GPIO 2 on ESP32)
@@ -29,7 +30,7 @@ void setup() {
 
   // Try to connect to saved WiFi credentials, or start AP if it fails
   wifiManager.setTimeout(WIFI_TIMEOUT_SECONDS);  // Timeout for WiFi connection attempts
-  if (!wifiManager.autoConnect("ESP32-AP", "password123")) {
+  if (!wifiManager.autoConnect(AP_SSID, AP_PASSWORD)) {
     Serial.println("Failed to connect, starting AP");
     digitalWrite(LED_PIN, LOW);  // Keep LED off in AP mode
     delay(3000);
